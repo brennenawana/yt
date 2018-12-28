@@ -5,6 +5,7 @@ module Yt
     # Provides methods to interact with YouTube videos.
     # @see https://developers.google.com/youtube/v3/docs/videos
     class Video < Resource
+      attr_writer :id
 
     ### SNIPPET ###
 
