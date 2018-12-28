@@ -589,7 +589,6 @@ module Yt
       # Override Resource's new to set statistics and content details as well
       # if the response includes them
       def initialize(options = {})
-        byebug
 
         super options
         if options[:statistics]
