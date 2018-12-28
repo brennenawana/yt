@@ -160,10 +160,10 @@ module Yt
       #   is accessed; it should be replaced with a filter on params instead.
       def endpoint
         @where_params ||= {}
-        if @parent.nil? && (@where_params.keys & [:id, :chart]).any?
-          '/youtube/v3/videos'
-        elsif @parent.nil? && (@where_params.keys & [:broadcastStatus]).any?
+        if (@where_params.keys & [:broadcastStatus]).any?
           '/youtube/v3/liveBroadcasts'
+        elsif @parent.nil? && (@where_params.keys & [:id, :chart]).any?
+          '/youtube/v3/videos'
         else
           '/youtube/v3/search'
         end
