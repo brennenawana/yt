@@ -143,7 +143,7 @@ module Yt
       end
 
       def videos_path
-        use_list_endpoint? ? '/youtube/v3/videos' : '/youtube/v3/search'
+        endpoint
       end
 
       # @private
@@ -153,9 +153,15 @@ module Yt
       # @return [Boolean] whether to use the /videos endpoint.
       # @todo: This is one of three places outside of base.rb where @where_params
       #   is accessed; it should be replaced with a filter on params instead.
-      def use_list_endpoint?
+      def endpoint
         @where_params ||= {}
-        @parent.nil? && (@where_params.keys & [:id, :chart]).any?
+        if @parent.nil? && (@where_params.keys & [:id, :chart]).any?
+          '/youtube/v3/videos'
+        elsif @parent.nil? && (@where_params.keys & [:broadcastStatus]).any?
+          '/youtube/v3/liveBroadcasts'
+        else
+          '/youtube/v3/search'
+        end
       end
     end
   end
