@@ -142,6 +142,11 @@ module Yt
         end
       end
 
+      def use_list_endpoint?
+        @where_params ||= {}
+        @parent.nil? && (@where_params.keys & [:id, :chart]).any?
+      end
+
       def videos_path
         endpoint
       end
